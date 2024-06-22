@@ -5,6 +5,9 @@ const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const colorNameList = require('color-name-list');
 
+console.log('Environment Variables:');
+console.log('API_KEY:', process.env.API_KEY);  // Add this line to log the API key
+
 const app = express();
 app.use(bodyParser.json());
 
