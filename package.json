@@ -13,12 +13,10 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
-  
-    "scripts": {
-      "client": "cd client && npm start",
-      "server": "cd server && node server.js",
-      "dev": "concurrently \"npm run client\" \"npm run server\"",
-      "build": "cd client && npm run build"
-    }
-
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && node server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "build": "cd client && npm install && npm run build"
+  }
 }
