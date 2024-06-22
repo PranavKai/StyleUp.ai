@@ -14,7 +14,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
   "engines": {
-    "node": "20.x"
+    "node": "20.12.2"
   },
   "scripts": {
     "client": "cd client && npm start",
