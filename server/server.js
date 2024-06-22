@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -10,7 +11,11 @@ console.log('API_KEY:', process.env.API_KEY);  // Add this line to log the API k
 
 const app = express();
 const port = process.env.PORT || 5000;
-
+app.use(cors({
+    origin: 'https://styleup-ai.onrender.com/', // Replace with your actual frontend URL
+    methods: 'GET,POST',
+    credentials: true
+  }));
 app.use(bodyParser.json());
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);

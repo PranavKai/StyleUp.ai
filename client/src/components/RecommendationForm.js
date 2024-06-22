@@ -58,7 +58,7 @@ export default function RecommendationForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('/recommend', formData);
+      const response = await axios.post('https://styleup-ai.onrender.com/', formData); // Use your actual backend URL
       setRecommendation(response.data);
     } catch (error) {
       console.error('Error fetching recommendation:', error);
