@@ -36,13 +36,6 @@ export default function RecommendationForm() {
   const [recommendation, setRecommendation] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   const handleComplexionChange = (color) => {
     setFormData({
       ...formData,
