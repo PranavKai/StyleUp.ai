@@ -7,9 +7,18 @@
     "stream-http": "^3.2.0",
     "tailwindcss": "^3.4.4",
     "url": "^0.11.3",
-    "util": "^0.12.5"
+    "util": "^0.12.5",
+    "concurrently": "^6.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  }
+  },
+  
+    "scripts": {
+      "client": "cd client && npm start",
+      "server": "cd server && node server.js",
+      "dev": "concurrently \"npm run client\" \"npm run server\"",
+      "build": "cd client && npm run build"
+    }
+
 }
