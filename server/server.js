@@ -6,16 +6,15 @@ const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const colorNameList = require('color-name-list');
 
-console.log('Environment Variables:');
-console.log('API_KEY:', process.env.API_KEY);  // Add this line to log the API key
-
 const app = express();
 const port = process.env.PORT || 5000;
+
 app.use(cors({
-    origin: 'https://styleup-ai.onrender.com/', // Replace with your actual frontend URL
+    origin: 'https://styleup-ai.onrender.com', // Replace with your actual frontend URL
     methods: 'GET,POST',
     credentials: true
-  }));
+}));
+
 app.use(bodyParser.json());
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
@@ -57,7 +56,7 @@ app.post('/recommend', async (req, res) => {
     const { event, gender, complexion, country, clothes } = req.body;
     const clothesList = clothes.map(c => `${c.item} (${c.type}, ${c.color})`).join(', ');
 
-    const prompt = `Provide an outfit recommendation for a ${gender} attending a ${event} in ${country} with ${complexion} complexion and the following clothes: ${clothesList}. Answer point wise without any explanation. In the last suggest some alternatives and a message for the user.`;
+    const prompt = `Suggest an outfit for a ${gender} attending a ${event} in ${country} with a ${complexion} complexion. Consider the following clothes: ${clothesList}. Provide the recommendation point-wise without any explanation. At the end, suggest some alternatives and include a brief message for the user.`;
 
     try {
         const result = await model.generateContent(prompt);
@@ -74,13 +73,18 @@ app.post('/recommend', async (req, res) => {
     }
 });
 
+// Test endpoint
+app.get('/test', (req, res) => {
+  res.json({ message: 'Backend is working!' });
+});
+
 // Serve the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('/api', (req, res) => {
     res.json({ message: 'Hello, World!' });
-  });
-  
-  app.listen(port, () => {
+});
+
+app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
-  });
+});
