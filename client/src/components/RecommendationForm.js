@@ -58,7 +58,7 @@ export default function RecommendationForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://gemini-api-dxqj.onrender.com/api', formData); // Use your actual backend URL
+      const response = await axios.post('https://gemini-api-dxqj.onrender.com/', formData); // Use your actual backend URL
       setRecommendation(response.data);
     } catch (error) {
       console.error('Error fetching recommendation:', error);
