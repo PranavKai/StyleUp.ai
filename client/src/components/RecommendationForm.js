@@ -4,27 +4,76 @@ import { Listbox } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { SketchPicker } from 'react-color';
 
+// Gender, events, and countries data
 const genders = ['Male', 'Female', 'Other'];
 const events = ['Wedding', 'Party', 'Office', 'Meeting', 'Date', 'Outdoor', 'Casual Meet'];
-const countries = ['USA', 'Canada', 'India', 'China', 'Japan', 'UK', 'Germany', 'France', 'Australia', 'Brazil']; // Add more as needed
-const clothingItems = ['Jeans', 'Shirt', 'T-Shirt', 'Jacket', 'Dress', 'Skirt'];
+const countries = [
+  'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 
+  'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 
+  'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 
+  'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo, Democratic Republic of the', 
+  'Congo, Republic of the', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 
+  'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 
+  'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 
+  'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 
+  'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South', 'Kuwait', 'Kyrgyzstan', 
+  'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 
+  'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 
+  'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 
+  'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 
+  'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 
+  'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 
+  'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 
+  'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 
+  'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 
+  'United Kingdom', 'United States of America', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 
+  'Zambia', 'Zimbabwe'
+];
 
+// Clothing items and their types
+const clothingItems =  ['TShirt', 'Shirt', 'Blouse', 'Sweater', 'Hoodie', 'Jacket', 'Coat', 'Pants', 'Skirt', 'Dress', 'Shoes', 'Underwear', 'Accessories'];
 const clothingTypes = {
-  Jeans: ['Narrow', 'Slim', 'Regular', 'Bootcut'],
-  Shirt: ['Formal', 'Casual'],
-  'T-Shirt': ['V-Neck', 'Crew Neck', 'Polo'],
-  Jacket: ['Blazer', 'Bomber', 'Denim'],
-  Dress: ['Evening', 'Casual', 'Cocktail'],
-  Skirt: ['Mini', 'Midi', 'Maxi']
+    TShirt: ['V-neck', 'Crew neck', 'Scoop neck', 'Polo', 'Henley', 'Raglan', 'Tank top', 'Sleeveless', 'Long sleeve', 'Graphic'],
+    Shirt: ['Casual', 'Formal', 'Bohemian', 'Cuban', 'Dress', 'Oxford', 'Chambray', 'Flannel', 'Linen', 'Western', 'Tuxedo', 'Hawaiian'],
+    Blouse: ['Peplum', 'Wrap', 'Off-shoulder', 'Button-up', 'Tie-front', 'Pussy bow', 'Ruffled', 'Smocked', 'Sheer', 'Cropped'],
+    Sweater: ['Pullover', 'Cardigan', 'Crew neck', 'V-neck', 'Turtleneck', 'Mock neck', 'Cable knit', 'Sweater vest', 'Hooded', 'Fleece'],
+    Hoodie: ['Pullover', 'Zip-up', 'Sleeveless', 'Longline', 'Crop', 'Graphic', 'Athletic', 'Fleece', 'Oversized'],
+    Jacket: ['Bomber', 'Denim', 'Leather', 'Blazer', 'Trench', 'Peacoat', 'Windbreaker', 'Puffer', 'Parka', 'Anorak'],
+    Coat: ['Overcoat', 'Trench coat', 'Peacoat', 'Duffle coat', 'Parka', 'Cape coat', 'Wrap coat', 'Raincoat', 'Chesterfield'],
+    Pants: ['Jeans', 'Chinos', 'Cargo', 'Sweatpants', 'Leggings', 'Palazzo', 'Culottes', 'Dress pants', 'Joggers', 'Corduroy'],
+    Skirt: ['A-line', 'Pencil', 'Maxi', 'Mini', 'Midi', 'Pleated', 'Wrap', 'Asymmetrical', 'Tulle', 'Circle'],
+    Dress: ['A-line', 'Ball gown', 'Sheath', 'Shift', 'Wrap', 'Maxi', 'Midi', 'Mini', 'Bodycon', 'Empire waist'],
+    Shoes: ['Boots', 'Sandals', 'Sneakers', 'Heels', 'Flats', 'Loafers', 'Slippers', 'Wedges', 'Espadrilles', 'Mules'],
+    Underwear: ['Briefs', 'Boxers', 'Trunks', 'Bikini', 'Thong', 'Boyshorts', 'Hipsters', 'Bras', 'Sports bras', 'Camisoles'],
+    Accessories: ['Scarf', 'Gloves', 'Hat', 'Cap', 'Beanie', 'Belt', 'Tie', 'Sunglasses', 'Watch', 'Jewelry']
 };
 
+
+// Clothing colors data
 const clothingColors = ['Black', 'White', 'Grey', 'Blue', 'Red', 'Green', 'Yellow', 'Pink', 'Purple'];
+
+// Skin tone colors
+const skinTones =  [
+  '#FFDFC4', // Fair (Ivory)
+  '#F0D5BE', // Fair (Warm)
+  '#E1B899', // Light (Beige)
+  '#E5C298', // Light (Warm Beige)
+  '#D1A384', // Medium Light
+  '#BB8B75', // Medium
+  '#A66A4C', // Medium Dark
+  '#8C4A30', // Olive
+  '#6F4F28', // Tan
+  '#5B3833', // Dark Brown
+  '#432820', // Deep Dark Brown
+  '#29211F', // Very Dark
+];
+
 
 export default function RecommendationForm() {
   const [formData, setFormData] = useState({
     event: events[0],
     gender: genders[0],
-    complexion: '#ffffff',  // Default to white
+    complexion: '#deb887',  // Default to a mid-tone
     country: countries[0],
     clothes: []
   });
@@ -56,6 +105,10 @@ export default function RecommendationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.clothes.length < 3) {
+      alert('Please add at least 3 clothing items.');
+      return;
+    }
     setLoading(true);
     try {
       const response = await axios.post('https://gemini-api-dxqj.onrender.com/recommend', formData); // Use your actual backend URL
@@ -66,9 +119,15 @@ export default function RecommendationForm() {
       setLoading(false);
     }
   };
+
+  const updateClothingType = (item) => {
+    setCurrentClothingType(clothingTypes[item][0]);
+  };
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Event */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Event</label>
           <Listbox value={formData.event} onChange={(event) => setFormData({ ...formData, event })}>
@@ -115,6 +174,7 @@ export default function RecommendationForm() {
           </Listbox>
         </div>
 
+        {/* Gender */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Gender</label>
           <Listbox value={formData.gender} onChange={(gender) => setFormData({ ...formData, gender })}>
@@ -161,14 +221,22 @@ export default function RecommendationForm() {
           </Listbox>
         </div>
 
+        {/* Skin Complexion */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Skin Complexion</label>
-          <SketchPicker
-            color={formData.complexion}
-            onChangeComplete={handleComplexionChange}
-          />
+          <div className="flex space-x-3">
+            {skinTones.map((color) => (
+              <div
+                key={color}
+                className={`w-8 h-8 rounded-full cursor-pointer`}
+                style={{ backgroundColor: color }}
+                onClick={() => handleComplexionChange({ hex: color })}
+              ></div>
+            ))}
+          </div>
         </div>
 
+        {/* Country of Origin */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Country of Origin</label>
           <Listbox value={formData.country} onChange={(country) => setFormData({ ...formData, country })}>
@@ -215,11 +283,13 @@ export default function RecommendationForm() {
           </Listbox>
         </div>
 
+        {/* Your Clothes */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Your Clothes</label>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Listbox value={currentClothingItem} onChange={setCurrentClothingItem}>
+              {/* Clothing Item */}
+              <Listbox value={currentClothingItem} onChange={(item) => { setCurrentClothingItem(item); updateClothingType(item); }}>
                 {({ open }) => (
                   <>
                     <div className="relative">
@@ -261,6 +331,8 @@ export default function RecommendationForm() {
                   </>
                 )}
               </Listbox>
+
+              {/* Clothing Type */}
               <Listbox value={currentClothingType} onChange={setCurrentClothingType}>
                 {({ open }) => (
                   <>
@@ -303,10 +375,14 @@ export default function RecommendationForm() {
                   </>
                 )}
               </Listbox>
+
+              {/* Clothing Color */}
               <SketchPicker
                 color={currentClothingColor}
                 onChangeComplete={handleClothingColorChange}
               />
+
+              {/* Add Clothing Item Button */}
               <button
                 type="button"
                 onClick={addClothingItem}
@@ -317,25 +393,28 @@ export default function RecommendationForm() {
             </div>
           </div>
         </div>
+
+        {/* Added Clothes List */}
         <div>
-            <label className="block text-sm font-medium text-gray-700">Added Clothes</label>
-            <ul className="border border-gray-300 rounded-md divide-y divide-gray-300">
-                {formData.clothes.map((clothing, index) => (
-                    <li key={index} className="p-4 flex items-center justify-between">
-                        <div>
-                            <span className="font-medium">{clothing.item}</span> - {clothing.type}
-                        </div>
-                        <div>
-                            <div
-                                className="w-4 h-4 rounded-full"
-                                style={{ backgroundColor: clothing.color }}
-                            ></div>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+          <label className="block text-sm font-medium text-gray-700">Added Clothes</label>
+          <ul className="border border-gray-300 rounded-md divide-y divide-gray-300">
+            {formData.clothes.map((clothing, index) => (
+              <li key={index} className="p-4 flex items-center justify-between">
+                <div>
+                  <span className="font-medium">{clothing.item}</span> - {clothing.type}
+                </div>
+                <div>
+                  <div
+                    className="w-4 h-4 rounded-full"
+                    style={{ backgroundColor: clothing.color }}
+                  ></div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
+        {/* Get Recommendation Button */}
         <div>
           <button
             type="submit"
@@ -345,7 +424,11 @@ export default function RecommendationForm() {
           </button>
         </div>
       </form>
+
+      {/* Loading Indicator */}
       {loading && <div className="mt-6 text-center">Loading...</div>}
+
+      {/* Recommendation Result */}
       {recommendation && (
         <div className="mt-6">
           <h2 className="text-lg font-medium text-gray-900">Recommended Outfit:</h2>

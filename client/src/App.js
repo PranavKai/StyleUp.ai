@@ -8,7 +8,14 @@ import About from './components/About';
 import Contact from './components/Contact';
 
 function App() {
-  const unsplashImageUrl = process.env.PUBLIC_URL + '/unsplash.jpg';
+  const unsplashImageUrls = [
+    process.env.PUBLIC_URL + '/unsplash1.jpg',
+    process.env.PUBLIC_URL + '/unsplash2.jpg',
+    process.env.PUBLIC_URL + '/unsplash3.jpg',
+    process.env.PUBLIC_URL + '/unsplash.jpg',
+    process.env.PUBLIC_URL + '/unsplash5.jpg',
+    process.env.PUBLIC_URL + '/unsplash6.jpg',
+  ];
 
   return (
     <Router>
@@ -16,7 +23,7 @@ function App() {
         <Navbar />
         <header className="max-w-4xl mx-auto mb-10 p-6">
           <h1 className="text-4xl font-bold text-center text-gray-800">StyleUp</h1>
-          <UnsplashImage url={unsplashImageUrl} />
+          <UnsplashImage urls={unsplashImageUrls} />
         </header>
         <main>
           <Routes>
