@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'https://styleup-ai.onrender.com', 
+    origin:  ['https://styleup-ai.onrender.com', 'http://localhost:3000'], 
     methods: 'GET,POST',
     credentials: true
 }));

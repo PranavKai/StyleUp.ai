@@ -103,6 +103,10 @@ export default function RecommendationForm() {
     });
   };
 
+  const apiUrl = process.env.NODE_ENV === 'production'
+  ? process.env.REACT_APP_API_URL_PRODUCTION
+  : process.env.REACT_APP_API_URL_LOCAL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.clothes.length < 3) {
@@ -111,8 +115,8 @@ export default function RecommendationForm() {
     }
     setLoading(true);
     try {
-      const response = await axios.post('https://gemini-api-dxqj.onrender.com/recommend', formData); // Use your actual backend URL
-      setRecommendation(response.data);
+      const response = await axios.post(`${apiUrl}/recommend`, formData);
+    setRecommendation(response.data);
     } catch (error) {
       console.error('Error fetching recommendation:', error);
     } finally {
